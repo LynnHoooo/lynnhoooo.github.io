@@ -1,13 +1,13 @@
 :root {
   --bg: #ffffff;
-  --bg-soft: rgba(255, 255, 255, 0.96);
-  --card: rgba(255, 255, 255, 0.76);
+  --bg-soft: rgba(255, 255, 255, 0.98);
+  --card: rgba(255, 255, 255, 0.88);
   --line: rgba(127, 91, 97, 0.14);
   --ink: #111111;
   --muted: #1f1f1f;
   --accent: #f7cac9;
   --accent-deep: #111111;
-  --shadow: 0 12px 34px rgba(143, 102, 108, 0.07);
+  --shadow: 0 10px 26px rgba(143, 102, 108, 0.04);
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 12px;
@@ -27,8 +27,8 @@ body {
   font-family: "Noto Serif SC", serif;
   line-height: 1.75;
   background:
-    radial-gradient(circle at top left, rgba(247, 202, 201, 0.05), transparent 22%),
-    radial-gradient(circle at 88% 8%, rgba(247, 202, 201, 0.04), transparent 16%),
+    radial-gradient(circle at top left, rgba(247, 202, 201, 0.035), transparent 20%),
+    radial-gradient(circle at 88% 8%, rgba(247, 202, 201, 0.03), transparent 14%),
     linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
 }
 
@@ -45,6 +45,29 @@ a:hover {
 img {
   display: block;
   max-width: 100%;
+}
+
+.lang-toggle {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  z-index: 60;
+  min-width: 62px;
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid rgba(127, 91, 97, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+.lang-toggle:hover {
+  background: rgba(247, 202, 201, 0.22);
 }
 
 .page-shell {
@@ -95,9 +118,9 @@ img {
 .hero-card-meta-inline {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 18px;
-  margin-top: 10px;
-  margin-bottom: 2px;
+  gap: 10px 12px;
+  margin-top: 12px;
+  margin-bottom: 4px;
   font-size: 0.88rem;
   color: var(--ink);
   font-weight: 600;
@@ -105,6 +128,10 @@ img {
 
 .hero-card-meta-inline p {
   margin: 0;
+  padding: 5px 12px;
+  border: 1px solid rgba(127, 91, 97, 0.14);
+  border-radius: 999px;
+  background: rgba(247, 202, 201, 0.14);
 }
 
 .hero-summary {
@@ -117,15 +144,26 @@ img {
 .hero-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 18px;
+  gap: 10px 12px;
   font-size: 0.92rem;
   color: var(--ink);
   font-weight: 600;
 }
 
+.hero-links a,
+.hero-links span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid rgba(127, 91, 97, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
 .hero-card {
   justify-self: end;
-  width: min(220px, 100%);
+  width: min(208px, 100%);
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -136,7 +174,9 @@ img {
   aspect-ratio: 4 / 5;
   width: 100%;
   object-fit: cover;
-  border-radius: 18px;
+  border: 1px solid rgba(127, 91, 97, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .hero-card > .hero-card-meta {
@@ -224,7 +264,7 @@ img {
   padding: 34px;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: var(--bg-soft);
+  background: rgba(255, 255, 255, 0.82);
   box-shadow: none;
 }
 
@@ -255,7 +295,7 @@ img {
   padding: 22px;
   border: 1px solid rgba(143, 102, 108, 0.1);
   border-radius: var(--radius-md);
-  background: var(--card);
+  background: rgba(255, 255, 255, 0.62);
 }
 
 .timeline-header,
@@ -411,6 +451,15 @@ img {
 }
 
 @media (max-width: 640px) {
+  .lang-toggle {
+    top: 12px;
+    right: 12px;
+    min-width: 56px;
+    height: 34px;
+    padding: 0 12px;
+    font-size: 0.84rem;
+  }
+
   .page-shell {
     width: min(100% - 18px, 100%);
     padding: 12px 0 32px;
