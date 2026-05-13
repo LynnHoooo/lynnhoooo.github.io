@@ -386,6 +386,60 @@ img {
   font-weight: 700;
 }
 
+.intro-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.intro-stat {
+  position: relative;
+  padding: 16px 16px 14px;
+  border: 1px solid rgba(127, 91, 97, 0.1);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.24)),
+    rgba(247, 202, 201, 0.08);
+  overflow: hidden;
+}
+
+.intro-stat::after {
+  content: "";
+  position: absolute;
+  inset: auto -20% -26px auto;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: rgba(247, 202, 201, 0.14);
+  filter: blur(2px);
+}
+
+.intro-stat-value {
+  display: block;
+  margin-bottom: 8px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  line-height: 0.95;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.intro-stat strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.intro-stat p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: rgba(17, 17, 17, 0.78);
+}
+
 .intro-notes {
   display: grid;
   gap: 14px;
@@ -407,6 +461,57 @@ img {
 
 .intro-note p {
   margin: 0;
+}
+
+.intro-note-timeline {
+  background:
+    linear-gradient(180deg, rgba(247, 202, 201, 0.12), rgba(255, 255, 255, 0.2)),
+    rgba(255, 255, 255, 0.26);
+}
+
+.mini-timeline {
+  display: grid;
+  gap: 12px;
+}
+
+.mini-timeline-item {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.mini-timeline-year {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 4px 8px;
+  border: 1px solid rgba(127, 91, 97, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.56);
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.mini-timeline-item p {
+  position: relative;
+  padding-left: 14px;
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+
+.mini-timeline-item p::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(247, 202, 201, 0.88);
+  box-shadow: 0 0 0 5px rgba(247, 202, 201, 0.15);
 }
 
 .section-heading h2 {
@@ -604,6 +709,10 @@ img {
   .metrics-grid {
     grid-template-columns: 1fr 1fr;
   }
+
+  .intro-highlights {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
@@ -646,6 +755,15 @@ img {
   .skills-grid,
   .metrics-grid {
     grid-template-columns: 1fr;
+  }
+
+  .mini-timeline-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .mini-timeline-item p {
+    padding-left: 12px;
   }
 
   .section-nav {
