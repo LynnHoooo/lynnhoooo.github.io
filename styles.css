@@ -1,7 +1,7 @@
 :root {
-  --bg: #faf6f5;
-  --bg-soft: rgba(255, 255, 255, 0.84);
-  --card: rgba(255, 255, 255, 0.56);
+  --bg: #ffffff;
+  --bg-soft: rgba(255, 255, 255, 0.96);
+  --card: rgba(255, 255, 255, 0.76);
   --line: rgba(127, 91, 97, 0.14);
   --ink: #111111;
   --muted: #1f1f1f;
@@ -27,9 +27,9 @@ body {
   font-family: "Noto Serif SC", serif;
   line-height: 1.75;
   background:
-    radial-gradient(circle at top left, rgba(247, 202, 201, 0.16), transparent 28%),
-    radial-gradient(circle at 88% 8%, rgba(247, 202, 201, 0.12), transparent 22%),
-    linear-gradient(180deg, #fffdfc 0%, #f9f3f2 100%);
+    radial-gradient(circle at top left, rgba(247, 202, 201, 0.05), transparent 22%),
+    radial-gradient(circle at 88% 8%, rgba(247, 202, 201, 0.04), transparent 16%),
+    linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
 }
 
 a {
@@ -62,7 +62,7 @@ img {
   padding: 34px 36px;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(250, 247, 242, 0.92));
+  background: rgba(255, 255, 255, 1);
   box-shadow: var(--shadow);
 }
 
@@ -92,6 +92,21 @@ img {
   font-weight: 600;
 }
 
+.hero-card-meta-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 10px;
+  margin-bottom: 2px;
+  font-size: 0.88rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.hero-card-meta-inline p {
+  margin: 0;
+}
+
 .hero-summary {
   max-width: 58ch;
   margin: 16px 0 18px;
@@ -110,18 +125,22 @@ img {
 
 .hero-card {
   justify-self: end;
-  width: min(300px, 100%);
-  padding: 14px;
-  border: 1px solid rgba(143, 102, 108, 0.12);
-  border-radius: calc(var(--radius-lg) - 4px);
-  background: rgba(255, 255, 255, 0.6);
+  width: min(220px, 100%);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .hero-card img {
   aspect-ratio: 4 / 5;
   width: 100%;
   object-fit: cover;
-  border-radius: calc(var(--radius-md) - 4px);
+  border-radius: 18px;
+}
+
+.hero-card > .hero-card-meta {
+  display: none;
 }
 
 .hero-card-meta {
@@ -376,7 +395,7 @@ img {
 
   .hero-card {
     justify-self: start;
-    width: min(280px, 100%);
+    width: min(200px, 100%);
   }
 
   .section {
