@@ -18,7 +18,10 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+  <div class="lang-toggle" id="lang-toggle" role="group" aria-label="Switch language">
+    <button class="lang-option is-active" id="lang-zh" type="button" data-lang="zh">中文</button>
+    <button class="lang-option" id="lang-en" type="button" data-lang="en">EN</button>
+  </div>
 
   <div class="page-shell">
     <header class="hero" id="top">
