@@ -1,13 +1,21 @@
-# 胡琳 Academic Homepage
+# Lynn’s Little Lab
 
-这是一个适用于 GitHub Pages 的静态个人主页，内容基于 `Lynn_Hoo_Resume_CN.md` 整理生成，整体风格偏学术申请与研究展示。
+Personal homepage of Lynn Hu, built with [Fuwari](https://github.com/saicaca/fuwari) and Astro.
 
-## 文件结构
+Live site: https://lynnhoooo.github.io/
 
-- `index.html`：主页主内容
-- `styles.css`：页面样式
-- `assets/profile.jpg`：首页头像
+## Repository layout
+- Repository root: built static website for the existing GitHub Pages branch deployment.
+- `site-source/`: editable Fuwari/Astro project and original MIT license.
+- `site-source/src/config.ts`: profile, navigation, and site settings.
+- `site-source/src/content/`: English project articles and About page.
+- `site-source/public/images/`: anime avatar and generated starry banner.
 
-## 发布方式
+## Development
+Use Node.js 22 and pnpm. From `site-source/`, run `pnpm install`, then `pnpm dev`.
 
-将当前目录内容推送到仓库 `LynnHoooo/lynnhoooo.github.io` 的默认分支后，即可通过 GitHub Pages 访问。
+To update the published site, run `pnpm build` and copy the contents of `site-source/dist/` to the repository root before committing. Keep `.nojekyll` in the root.
+
+The linked one-page PDF resume remains in its original language. All website text is English.
+
+Theme: Fuwari by saicaca, MIT license; attribution retained in the footer and source license.

@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /_astro/
+
+Sitemap: https://lynnhoooo.github.io/sitemap-index.xml
