@@ -1,15 +1,20 @@
 ---
 import type { GetStaticPaths } from "astro";
+import { Icon } from "astro-icon/components";
 import HomeIntro from "../components/HomeIntro.astro";
 import Pagination from "../components/control/Pagination.astro";
 import PostPage from "../components/PostPage.astro";
 import { PAGE_SIZE } from "../constants/constants";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { getSortedPosts } from "../utils/content-utils";
+import { url } from "../utils/url-utils";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const allBlogPosts = await getSortedPosts();
-	return paginate(allBlogPosts, { pageSize: PAGE_SIZE });
+	const projectPosts = allBlogPosts.filter(
+		(post) => post.data.category?.trim().toLowerCase() !== "say something",
+	);
+	return paginate(projectPosts, { pageSize: PAGE_SIZE });
 }) satisfies GetStaticPaths;
 // https://github.com/withastro/astro/issues/6507#issuecomment-1489916992
 
@@ -22,4 +27,26 @@ const len = page.data.length;
     {page.currentPage === 1 && <HomeIntro />}
     <PostPage page={page}></PostPage>
     <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
+    {page.currentPage === 1 && (
+        <a
+            href={url("/say-something/")}
+            class="card-base mt-4 px-6 md:px-8 py-5 flex items-center justify-between gap-4 hover:-translate-y-0.5 transition onload-animation group"
+            style={`animation-delay: calc(var(--content-delay) + ${(len + 1) * 50}ms)`}
+        >
+            <div class="flex items-center gap-4">
+                <div class="w-11 h-11 rounded-xl bg-[var(--btn-regular-bg)] text-[var(--primary)] flex items-center justify-center shrink-0">
+                    <Icon name="material-symbols:edit-note-rounded" class="text-2xl" />
+                </div>
+                <div>
+                    <div class="text-base font-bold text-black/90 dark:text-white/90 group-hover:text-[var(--primary)] transition">
+                        Say Something
+                    </div>
+                    <p class="text-xs md:text-sm text-black/55 dark:text-white/55 mt-0.5">
+                        Thoughts, reflections & late-night notes beyond datasheets and RTL.
+                    </p>
+                </div>
+            </div>
+            <Icon name="material-symbols:chevron-right-rounded" class="text-2xl text-[var(--primary)] shrink-0 group-hover:translate-x-0.5 transition" />
+        </a>
+    )}
 </MainGridLayout>
