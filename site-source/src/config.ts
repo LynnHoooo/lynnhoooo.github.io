@@ -42,6 +42,7 @@ export const navBarConfig: NavBarConfig = {
  links: [
   {name: "Home", url: "/", external: false},
   {name: "Projects", url: "/archive/", external: false},
+  {name: "Say Something", url: "/say-something/", external: false},
   {name: "About", url: "/about/", external: false},
   {name: "Resume", url: "/resume.pdf", external: true},
   {name: "GitHub", url: "https://github.com/lynnhoooo", external: true},

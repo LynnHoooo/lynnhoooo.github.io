@@ -1,0 +1,120 @@
+---
+import Markdown from "@components/misc/Markdown.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { getSortedPosts } from "@utils/content-utils";
+import { formatDateToYYYYMMDD } from "@utils/date-utils";
+import { getPostUrlBySlug, getTagUrl } from "@utils/url-utils";
+import { Icon } from "astro-icon/components";
+
+const allPosts = await getSortedPosts();
+const sayPosts = allPosts.filter(
+	(post) => post.data.category?.trim().toLowerCase() === "say something",
+);
+
+const renderedPosts = await Promise.all(
+	sayPosts.map(async (entry) => {
+		const { Content, remarkPluginFrontmatter } = await entry.render();
+		return {
+			entry,
+			Content,
+			remarkPluginFrontmatter,
+		};
+	}),
+);
+---
+
+<MainGridLayout title="Say Something" description="Thoughts, reflections, and notes beyond code and datasheets.">
+	<div class="flex flex-col gap-4">
+		<!-- Page Header Card -->
+		<div class="card-base px-6 md:px-9 py-6 onload-animation">
+			<div class="flex flex-wrap items-center justify-between gap-3">
+				<div>
+					<div class="text-xs font-bold tracking-[0.18em] uppercase text-[var(--primary)] mb-1.5">
+						SAY SOMETHING
+					</div>
+					<h1 class="text-2xl md:text-3xl font-bold text-black/90 dark:text-white/90">
+						Say Something
+					</h1>
+					<p class="text-sm text-black/60 dark:text-white/60 mt-1.5">
+						Thoughts, reflections & late-night notes beyond datasheets and RTL.
+					</p>
+				</div>
+				<div class="text-xs font-medium px-3 py-1.5 rounded-lg bg-[var(--btn-regular-bg)] text-[var(--primary)]">
+					{renderedPosts.length} {renderedPosts.length === 1 ? "post" : "posts"}
+				</div>
+			</div>
+		</div>
+
+		<!-- Say Something Entries -->
+		{renderedPosts.length === 0 ? (
+			<div class="card-base px-6 md:px-9 py-10 text-center text-black/50 dark:text-white/50 onload-animation">
+				Nothing here yet.
+			</div>
+		) : (
+			renderedPosts.map(({ entry, Content, remarkPluginFrontmatter }, idx) => (
+				<article
+					class="card-base px-6 md:px-9 py-7 onload-animation"
+					style={`animation-delay: calc(var(--content-delay) + ${(idx + 1) * 50}ms);`}
+				>
+					<!-- Meta Row -->
+					<div class="flex flex-wrap items-center gap-4 text-sm text-black/50 dark:text-white/50 mb-3">
+						<div class="flex items-center gap-1.5">
+							<Icon name="material-symbols:calendar-today-outline-rounded" class="text-[var(--primary)] text-base" />
+							<time datetime={entry.data.published.toISOString()}>
+								{formatDateToYYYYMMDD(entry.data.published)}
+							</time>
+						</div>
+						<div class="flex items-center gap-1.5">
+							<Icon name="material-symbols:notes-rounded" class="text-[var(--primary)] text-base" />
+							<span>{remarkPluginFrontmatter.words} words</span>
+						</div>
+						<div class="flex items-center gap-1.5">
+							<Icon name="material-symbols:schedule-outline-rounded" class="text-[var(--primary)] text-base" />
+							<span>{remarkPluginFrontmatter.minutes} min read</span>
+						</div>
+					</div>
+
+					<!-- Title -->
+					<a
+						href={getPostUrlBySlug(entry.slug)}
+						class="group block text-2xl md:text-[1.75rem] font-bold text-black/90 dark:text-white/90 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition mb-3"
+					>
+						{entry.data.title}
+					</a>
+
+					<!-- Tags -->
+					{entry.data.tags && entry.data.tags.length > 0 && (
+						<div class="flex flex-wrap gap-2 mb-5">
+							{entry.data.tags.map((tag) => (
+								<a
+									href={getTagUrl(tag)}
+									class="text-xs px-2.5 py-1 rounded-md bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] text-[var(--primary)] transition"
+								>
+									#{tag}
+								</a>
+							))}
+						</div>
+					)}
+
+					<div class="border-t border-dashed border-black/10 dark:border-white/10 mb-5"></div>
+
+					<!-- Full Markdown Content -->
+					<Markdown class="markdown-content">
+						<Content />
+					</Markdown>
+
+					<!-- Footer Link -->
+					<div class="mt-6 pt-4 border-t border-dashed border-black/10 dark:border-white/10 flex justify-end">
+						<a
+							href={getPostUrlBySlug(entry.slug)}
+							class="inline-flex items-center gap-1 text-sm font-medium text-[var(--primary)] hover:underline"
+						>
+							<span>Open standalone post</span>
+							<Icon name="material-symbols:chevron-right-rounded" class="text-lg" />
+						</a>
+					</div>
+				</article>
+			))
+		)}
+	</div>
+</MainGridLayout>
